@@ -16,42 +16,52 @@
 # 
 
 
-
+require(ggplot2)
 data <- iris
 formula <- Sepal.Length ~  Sepal.Width + Petal.Length + Petal.Width
-mx <- model.matrix(formula, data=data)
-y <- all.vars(formula)[1]
 
-ta <- t(mx)
+linreg <- function(formula, data){
+  
+  mx <- model.matrix(formula, data=data)
+  y <- all.vars(formula)[1]
+  
+  ta <- t(mx)
+  
+  # Regressions coefficients
+  betas <- solve((ta %*% mx)) %*% ta %*% data[,y[1]==names(data)]
+  
+  # The fitted values
+  y_hat <- mx %*% betas
+  
+  # The residuals
+  e_hat <- data[,y[1]==names(data)] - y_hat
+  
+  
+  # The degrees of freedom
+  n <- nrow(mx)
+  p <- ncol(mx)
+  df <- n - p
+  
+  # The residual variance
+  rvariance <- t(e_hat) %*% e_hat / df
+  
+  # The variance of the regression coefficients:
+  right_side <- 1/(t(mx)%*%mx)
+  var_betas <- rvariance[1,1] * right_side
+  
+  # The t-values for each coefficient
+  tB <- betas / sqrt(diag(var_betas))
+  
+  linregRC <- setRefClass("linreg",
+                              fields = list(Coefficients = "numeric", Fits = "numeric",
+                                            Residual = "numeric", degreesFreedom = "numeric",rvariance = "numeric",
+                                            var_betas="numeric",tB="numeric"),
+                              methods = list(
+                                
+                              ))
+  result <- linregRC(Coefficients = c(betas), Fits = c(y_hat), Residual = c(e_hat),degreesFreedom=c(df),rvariance=c(rvariance),
+                     var_betas=c(var_betas),tB=c(tB))
+}
 
-# Regressions coefficients
-betas <- solve((ta %*% mx)) %*% ta %*% data[,y[1]==names(data)]
+test <- linreg(formula, data)
 
-# The fitted values
-y_hat <- mx %*% betas
-
-# The residuals
-e_hat <- data[,y[1]==names(data)] - y_hat
-
-
-# The degrees of freedom
-n <- nrow(mx)
-p <- ncol(mx)
-df <- n - p
-
-# The residual variance
-rvariance <- t(e_hat) %*% e_hat / df
-
-# The variance of the regression coefficients:
-right_side <- 1/(t(mx)%*%mx)
-var_betas <- rvariance[1,1] * right_side
-
-# The t-values for each coefficient
-tB <- betas / sqrt(diag(var_betas))
-
-
-linreg <- setRefClass("linreg",
-                       fields = list(),
-                       methods = list(
-                         
-                       ))
