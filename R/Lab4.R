@@ -20,6 +20,13 @@ require(ggplot2)
 data <- iris
 formula <- Sepal.Length ~  Sepal.Width + Petal.Length + Petal.Width
 
+
+#' @title Ordinary Linear Algebra Calculations
+#' @name  linreg
+#' @param formula formula
+#' @param data numeric
+#' @return RC including some linear algebra calculations
+#' @description The function takes formula and data, and calculates linear algebra terms.
 linreg <- function(formula, data){
   
   mx <- model.matrix(formula, data=data)
