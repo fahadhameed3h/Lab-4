@@ -21,7 +21,7 @@ data <- iris
 formula <- Sepal.Length ~  Sepal.Width + Petal.Length + Petal.Width
 
 
-#' @title Ordinary Linear Algebra Calculations
+#' @title Ordinary Linear Algebra Calculations 
 #' @name  linreg
 #' @param formula formula
 #' @param data numeric
