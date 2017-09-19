@@ -2,7 +2,6 @@ require(ggplot2)
 data <- iris
 formula <- Petal.Length ~ Species
 
-
 #' @title Ordinary Linear Algebra Calculations
 #' @name  linreg
 #' @param formula formula
@@ -90,33 +89,38 @@ QR_decompostion <- function(formula, data)
   result <- QR_res(Beta_QR = c(Beta_QR),
                    Reg_coff=c(Reg_coff))
 }
-#print(QR_decompostion(formula, data))
- 
+
 data(iris)
-#mod_object <- lm(Petal.Length~Species, data = iris)
-print <- function()
-{
-  return(lm(formula = Petal.Length~Sepal.Width+Sepal.Length, data = iris))
-}
+plot(lm(Petal.Length ~ Species, data=iris))
 
-pred <- function()
-{
- linreg_mod <- lm(formula = Petal.Length~Sepal.Width+Sepal.Length, data=iris)
- return(predict(linreg_mod))
-}
-
-resid <- function()
-{
-  linreg_mod <- lm(Petal.Length~Sepal.Width+Sepal.Length, data = iris)
-  return(residuals(linreg_mod))
-}
-
-coef <- function()
-{
-  mod_object <- lm(Petal.Length~Sepal.Width+Sepal.Length, data = iris)
-  return(coefficients(mod_object))
-}
 print()
 pred()
 resid()
 coef()
+summary(data=iris)
+# print <- function()
+# {
+#   linreg_mod <- lm(Petal.Length ~ Species, data=iris)
+#   return(linreg_mod)
+# }
+# pred <- function()
+# {
+#  linreg_mod <- lm(formula = Petal.Length~Species, data=iris)
+#  return(predict(linreg_mod))
+# }
+# 
+# resid <- function()
+# {
+#   linreg_mod <- lm(Petal.Length~Species, data = iris)
+#   return(residuals(linreg_mod))
+# }
+# 
+# coef <- function()
+# {
+#   mod_object <- lm(Petal.Length~Species, data = iris)
+#   return(coefficients(mod_object))
+#}
+#print()
+# pred()
+# resid()
+# coef()
