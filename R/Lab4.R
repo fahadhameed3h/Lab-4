@@ -18,7 +18,7 @@
 
 require(ggplot2)
 data <- iris
-formula <- Sepal.Length ~  Sepal.Width + Petal.Length + Petal.Width
+formula <- Petal.Length ~ Species
 
 
 #' @title Ordinary Linear Algebra Calculations
@@ -64,11 +64,16 @@ linreg <- function(formula, data){
                                             Residual = "numeric", degreesFreedom = "numeric",rvariance = "numeric",
                                             var_betas="numeric",tB="numeric"),
                               methods = list(
-                                
+                                plot = function(result){
+
+                                }
                               ))
   result <- linregRC(Coefficients = c(betas), Fits = c(y_hat), Residual = c(e_hat),degreesFreedom=c(df),rvariance=c(rvariance),
                      var_betas=c(var_betas),tB=c(tB))
 }
 
 test <- linreg(formula, data)
+
+
+
 
