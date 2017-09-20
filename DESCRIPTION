@@ -8,4 +8,7 @@ Maintainer: <fahadhameed199@gmail.com>
 Description: Lab 4 The Package includes functions Regressions coefficients. 
 License: Apache
 RoxygenNote: 6.0.1
-Suggests: testthat
+Suggests: testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

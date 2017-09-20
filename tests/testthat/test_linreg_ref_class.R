@@ -18,14 +18,14 @@ test_that("class is correct", {
 
 test_that("print() method works", {
   linreg_mod <- linreg$new(Petal.Length~Sepal.Width+Sepal.Length, data=iris)
-
+  
   expect_output(linreg_mod$print(),"linreg(formula = Petal.Length ~ Sepal.Width + Sepal.Length, data = iris)")  
   expect_output(linreg_mod$print()," (Intercept)   Sepal.Width  Sepal.Length ")  
 })
 
 test_that("pred() method works", {
   linreg_mod <- linreg$new(Petal.Length~Sepal.Width+Sepal.Length, data=iris)
-
+  
   expect_equal(round(unname(linreg_mod$pred()[c(1,5,7)]),2), c(1.85, 1.53, 1.09))    
 })
 
@@ -37,7 +37,7 @@ test_that("resid() method works", {
 
 test_that("coef() method works", {
   linreg_mod <- linreg$new(Petal.Length~Sepal.Width+Sepal.Length, data=iris)
-
+  
   expect_true(all(round(unname(linreg_mod$coef()),2) %in% c(-2.52, -1.34, 1.78)))
 })
 
